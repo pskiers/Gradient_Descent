@@ -24,21 +24,28 @@ def gradient_g(x):
 
 
 def main():
-    pass
+    starts = {}
+    x1 = float(input('Enter starting x1 coordinates for f: '))
+    x2 = float(input('Enter starting x2 coordinates for f: '))
+    starts[f] = [x1, x2]
+    starts[g] = [float(input('Enter starting point for g: '))]
+    steps = {}
+    steps[f] = float(input('Enter step for f: '))
+    steps[g] = float(input('Enter step for g: '))
+    for func in FUNC_N_GRAD.keys():
+        minimum, history = gradient_descent(x=starts[func],
+                                            function=func,
+                                            gradient=FUNC_N_GRAD[func],
+                                            epsilon=EPSILONS[func],
+                                            step=steps[func],
+                                            step_change=STEP_CHANGES[func])
+        print("Function minimum in: ", minimum, '\n', history)
 
 
 FUNC_N_GRAD = {f: gradient_f, g: gradient_g}
 EPSILONS = {f: 0.001, g: 0.001}
-STEPS = {f: 1, g: 0.01}
 STEP_CHANGES = {f: 1.5, g: 1.5}
-STARTS = {f: [5, 5], g: [0.51]}
+
 
 if __name__ == "__main__":
-    for func in FUNC_N_GRAD.keys():
-        minimum = gradient_descent(x=STARTS[func],
-                                   function=func,
-                                   gradient=FUNC_N_GRAD[func],
-                                   epsilon=EPSILONS[func],
-                                   step=STEPS[func],
-                                   step_change=STEP_CHANGES[func])
-        print("Function minimum in: ", minimum, '\n')
+    main()

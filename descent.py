@@ -3,6 +3,7 @@ def get_next_x(x, gradient, step):
 
 
 def gradient_descent(x, function, gradient, epsilon, step, step_change):
+    history = [x]
     while True:
         next_x = get_next_x(x=x, gradient=gradient, step=step)
         if (abs(function(x) - function(next_x))) <= epsilon:
@@ -12,8 +13,9 @@ def gradient_descent(x, function, gradient, epsilon, step, step_change):
                     ok = False
                     break
             if ok:
-                return x
+                return x, history
         if function(x) <= function(next_x):
             step = step / step_change
             continue
         x = next_x
+        history.append(x)
