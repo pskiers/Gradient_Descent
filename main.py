@@ -1,5 +1,6 @@
 from descent import gradient_descent
 from math import cos, pi, sin
+from plot import plot_history
 import numpy
 
 
@@ -39,7 +40,8 @@ def main():
                                             epsilon=EPSILONS[func],
                                             step=steps[func],
                                             step_change=STEP_CHANGES[func])
-        print("Function minimum in: ", minimum, '\n', history)
+        print("Function minimum in: ", minimum, '\n')
+        plot_history(history, func)
 
 
 FUNC_N_GRAD = {f: gradient_f, g: gradient_g}
